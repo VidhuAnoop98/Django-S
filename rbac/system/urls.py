@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import create_usergit 
+from .views import create_user
 
 urlpatterns = [
     path('create-user/', create_user),
