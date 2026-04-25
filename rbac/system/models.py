@@ -31,6 +31,7 @@ class Feature(models.Model):
         ] 
     name = models.CharField(max_length=30, choices=FEATURE_CHOICES, unique=True) 
     level = models.IntegerField()   
+
     def __str__(self1): 
         return self1.name  
 
@@ -46,6 +47,7 @@ class UserFlow(models.Model):
         ] 
     name = models.CharField(max_length=60, choices=USERFLOW_CHOICES, unique=True) 
     level = models.IntegerField()   
+    
     def __str__(self): 
         return self.name 
 
@@ -57,6 +59,7 @@ class Security(models.Model):
         ] 
     name = models.CharField(max_length=60, choices=SECURITY_CHOICES, unique=True) 
     level = models.IntegerField()   
+    
     def __str__(self): 
         return self.name  
 

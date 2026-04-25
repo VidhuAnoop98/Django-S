@@ -29,20 +29,59 @@ def create_user(request):
                      "user_id": user.id}) 
 
 @api_view(['POST']) 
-def create_user(request): 
+def create_feature(request): 
     creator = request.user 
     data = request.data 
     try: 
         feature = Feature.objects.get(name=data['feature']) 
     except Feature.DoesNotExist: 
         return Response({"error": "Invalid feature"}) 
-    if creator.role.level >= feature.level: 
+    if creator.feature.level >= feature.level: 
         return Response({"error": "Cannot create equal/higher feature user"}, status=403) 
     user = User.objects.create_user( 
         username=data['username'], 
         password=data['password'], 
-        role=role, 
+        feature=feature, 
         email=data.get('email') 
     ) 
     return Response({"message": "User created", 
-                     "user_id": user.id}) 
+                     "user_id": user.id})
+
+@api_view(['POST']) 
+def create_userflow(request): 
+    creator = request.user 
+    data = request.data 
+    try: 
+        userflow = UserFlow.objects.get(name=data['userflow']) 
+    except UserFlow.DoesNotExist: 
+        return Response({"error": "Invalid userflow"}) 
+    if creator.userflow.level >= userflow.level: 
+        return Response({"error": "Cannot create equal/higher userflow user"}, status=403) 
+    user = User.objects.create_user( 
+        username=data['username'], 
+        password=data['password'], 
+        userflow=userflow, 
+        email=data.get('email') 
+    ) 
+    return Response({"message": "User created", 
+                     "user_id": user.id})
+
+@api_view(['POST']) 
+def create_security(request): 
+    creator = request.user 
+    data = request.data 
+    try: 
+        security = Security.objects.get(name=data['security']) 
+    except Security.DoesNotExist: 
+        return Response({"error": "Invalid security"}) 
+    if creator.security.level >= security.level: 
+        return Response({"error": "Cannot create equal/higher security user"}, status=403) 
+    user = User.objects.create_user( 
+        username=data['username'], 
+        password=data['password'], 
+        security=security, 
+        email=data.get('email') 
+    ) 
+    return Response({"message": "User created", 
+                     "user_id": user.id})
+
